@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="geramedias.geraMediasController">
+	<bottom>
+		<Label fx:id="avisos" alignment="CENTER" maxWidth="1.7976931348623157E308" text="Label" BorderPane.alignment="CENTER" />
+	</bottom>
+   <top>
+		<TabPane fx:id="tabpane" prefHeight="419.0" prefWidth="1099.0" BorderPane.alignment="CENTER">
+			<tabs>
+				<Tab text="Dados">
+					<content>
+						<GridPane>
+							<columnConstraints>
+								<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+								<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+								<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+								<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+								<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+								<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+								<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+							</columnConstraints>
+							<rowConstraints>
+								<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+								<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+								<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+								<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+								<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+								<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+								<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+								<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+							</rowConstraints>
+							<children>
+								<Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="Gerador Médias Diárias" GridPane.columnSpan="2147483647" />
+								<Label alignment="CENTER_RIGHT" maxHeight="1.7976931348623157E308" text="Arquivo Leituras:" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+								<Label alignment="CENTER_RIGHT" maxWidth="1.7976931348623157E308" text="Arquivo Médias:" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+								<TextField fx:id="tfLeitura" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="2" />
+								<TextField fx:id="tfMedias" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="3" />
+								<Button mnemonicParsing="false" onAction="#handleProcurarLeitura" text="Procurar" GridPane.columnIndex="4" GridPane.rowIndex="2" />
+								<Button mnemonicParsing="false" onAction="#handleProcurarMedia" text="Procurar" GridPane.columnIndex="4" GridPane.rowIndex="3" />
+								<Button alignment="CENTER" mnemonicParsing="false" onAction="#handleProcessar" text="Processar" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
+							</children>
+						</GridPane>
+					</content>
+				</Tab>
+				<Tab text="Conferir">
+               <content>
+                  <GridPane>
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <HBox alignment="CENTER_RIGHT">
+                           <children>
+                              <Label fx:id="laNumMed" alignment="CENTER_RIGHT" text="NN" />
+                              <Label text=" Medidores: " />
+                           </children>
+                        </HBox>
+                        <ComboBox fx:id="cbMedidores" onAction="#handleSelMedidor" prefWidth="200.0" GridPane.columnIndex="1" />
+                        <AreaChart fx:id="bcRawDados" title="Médias" GridPane.columnSpan="2147483647" GridPane.rowIndex="1" GridPane.rowSpan="3">
+                          <xAxis>
+                            <NumberAxis fx:id="eixoX" label="Data" side="BOTTOM" />
+                          </xAxis>
+                          <yAxis>
+                            <NumberAxis fx:id="eixoY" label="Energia" side="LEFT" />
+                          </yAxis>
+                        </AreaChart>
+                        <Button mnemonicParsing="false" onAction="#handleSeguinte" text="Seguinte" GridPane.columnIndex="2" />
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnSpan="2147483647" GridPane.rowIndex="5">
+                           <children>
+                              <Button mnemonicParsing="false" onAction="#handleEsquerda" text="&lt;&lt;" />
+                              <Button mnemonicParsing="false" onAction="#handleEsqMeio" text="&lt;" />
+                              <Button mnemonicParsing="false" onAction="#handleDirMeio" text="&gt;" />
+                              <Button mnemonicParsing="false" onAction="#handleDireita" text="&gt;&gt;" />
+                              <Separator orientation="VERTICAL" prefHeight="200.0" />
+                              <Label fx:id="laNumAmo" text="222" />
+                              <Label text=" Amostras" />
+                              <Button alignment="CENTER" mnemonicParsing="false" onAction="#handleEncolhe" prefWidth="90.0" text="Encolhe" />
+                              <Separator orientation="VERTICAL" prefHeight="200.0" />
+                              <Button mnemonicParsing="false" onAction="#handleExpande" prefWidth="90.0" text="Expande" />
+                              <Separator orientation="VERTICAL" prefHeight="200.0" />
+                              <Button mnemonicParsing="false" onAction="#handleAte" prefWidth="90.0" text="Gera Até" />
+                              <Separator orientation="VERTICAL" prefHeight="200.0" />
+                              <Button mnemonicParsing="false" onAction="#handleOk" prefWidth="90.0" text="Ok" />
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnSpan="2147483647" GridPane.rowIndex="4">
+                           <children>
+                              <Label alignment="CENTER" maxHeight="1.7976931348623157E308" text="Seleção de: " />
+                              <Label fx:id="laSelInf" alignment="CENTER" maxHeight="1.7976931348623157E308" minWidth="33.0" text="no..." textFill="#0d0000" />
+                              <Label alignment="CENTER" maxHeight="1.7976931348623157E308" text=" a " />
+                              <Label fx:id="laSelSup" alignment="CENTER" maxHeight="1.7976931348623157E308" minWidth="33.0" text="no..." />
+                              <Separator orientation="VERTICAL" prefHeight="200.0" />
+                              <Button mnemonicParsing="false" onAction="#handleCancSel" text="Cancela" />
+                              <Separator orientation="VERTICAL" prefHeight="200.0" />
+                              <Button mnemonicParsing="false" onAction="#handleZerarSel" text="Zerar" />
+                              <Separator orientation="VERTICAL" prefHeight="200.0" />
+                              <Button mnemonicParsing="false" onAction="#handlePropSel" text="Prop c/ Média" />
+                              <Separator orientation="VERTICAL" prefHeight="200.0" />
+                              <Button mnemonicParsing="false" onAction="#handleMediaSel" text="Media" />
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnSpan="2147483647" GridPane.rowIndex="6">
+                           <children>
+                              <Button mnemonicParsing="false" onAction="#handleSaiOk" text="Sai Atualizando" />
+                              <Separator orientation="VERTICAL" prefHeight="200.0" />
+                              <Button mnemonicParsing="false" onAction="#handleSaiMedia" text="Grava Médias" />
+                              <Separator orientation="VERTICAL" prefHeight="200.0" />
+                              <Button mnemonicParsing="false" onAction="#handleSaiCanc" text="Sai Sem Atualizar" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </GridPane>
+               </content></Tab>
+			</tabs>
+		</TabPane>
+   </top>
+</BorderPane>
